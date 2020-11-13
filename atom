@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+   winPath=""
+else
+   winPath=$(echo "U:$(realpath $1)" | sed -e 's/\//\\/g')
+fi
+cmd.exe /c atom $winPath 2> >( egrep >&2 -v "^'\\\|^CMD.EXE was started with the above path as the current directory.|^UNC paths are not supported.")
